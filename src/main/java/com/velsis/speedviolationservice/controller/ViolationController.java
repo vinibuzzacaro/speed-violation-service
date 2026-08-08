@@ -3,7 +3,7 @@ package com.velsis.speedviolationservice.controller;
 import com.velsis.speedviolationservice.dto.EvaluateViolationRequest;
 import com.velsis.speedviolationservice.dto.EvaluateViolationResponse;
 import com.velsis.speedviolationservice.dto.ViolationResponse;
-import com.velsis.speedviolationservice.enums.OriginType;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,10 @@ public class ViolationController {
 
     @PostMapping("/evaluate")
     public ResponseEntity<EvaluateViolationResponse> evaluate(
-        @RequestHeader("x-origin") OriginType originHeader,
+        @Parameter(description = "Equipment origin: FIXED, MOBILE ou HANDHELD", required = true)
+        @RequestHeader(value = "x-origin", required = false)
+        String originHeader,
+
         @RequestBody EvaluateViolationRequest request
     ) {
         //TODO
