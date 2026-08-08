@@ -8,11 +8,13 @@ import com.velsis.speedviolationservice.model.Violation;
 import com.velsis.speedviolationservice.repository.ViolationRepository;
 import com.velsis.speedviolationservice.validation.EvaluationRequestValidator.ValidatedRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ViolationService {
@@ -28,7 +30,10 @@ public class ViolationService {
         ViolationSummary summary = null;
         if (result.hasViolation()) {
             persistViolation(request, result);
+            log.info("Violation detected. Record: {}", result);
             summary = new ViolationSummary(result.severity(), result.ctbCode());
+        } else {
+            log.debug("No violation. Record: {}", result);
         }
 
         return new EvaluateViolationResponse(
