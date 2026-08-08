@@ -3,12 +3,16 @@ package com.velsis.speedviolationservice.controller;
 import com.velsis.speedviolationservice.dto.EvaluateViolationRequest;
 import com.velsis.speedviolationservice.dto.EvaluateViolationResponse;
 import com.velsis.speedviolationservice.dto.ViolationResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@Tag(name = "Violations")
 public class ViolationController {
 
     @PostMapping("/evaluate")
