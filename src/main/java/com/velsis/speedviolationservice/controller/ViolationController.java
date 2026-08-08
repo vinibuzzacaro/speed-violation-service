@@ -15,8 +15,8 @@ import java.util.List;
 @Tag(name = "Violations")
 public class ViolationController {
 
-    @PostMapping("/evaluate")
-    public ResponseEntity<EvaluateViolationResponse> evaluate(
+    @PostMapping("/v1/violations/evaluate")
+    public ResponseEntity<EvaluateViolationResponse> evaluateV1(
         @Parameter(description = "Equipment origin: FIXED, MOBILE ou HANDHELD", required = true)
         @RequestHeader(value = "x-origin", required = false)
         String originHeader,
@@ -27,8 +27,8 @@ public class ViolationController {
         return null;
     }
 
-    @GetMapping
-    public ResponseEntity<List<ViolationResponse>> findByLicensePlate(
+    @GetMapping("/v1/violations")
+    public ResponseEntity<List<ViolationResponse>> findByLicensePlateV1(
         @RequestParam("licensePlate") String licensePlate
     ) {
         //TODO
